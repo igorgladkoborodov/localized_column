@@ -1,0 +1,37 @@
+= Localized Column
+
+Rails plugin for localization activerecord model fields. It stores several translations in the same field serializing them.
+
+This is an early draft of plugin, so use it on your own risk.
+
+
+== Usage
+
+  script/plugin install git://github.com/varezhka/localized_column.git
+
+In the model:
+
+  localized_column :title, :about
+
+The plugin creates localized fields for each available locales:
+
+  @post.title_en = 'English title'
+  @post.title_ru = 'Русский тайтл'
+
+  @post.title_en      # => 'English title'
+  @post.title_ru      # => 'Русский тайтл'
+
+  I18n.default_locale # => :en
+  @post.title         # => 'English title'
+
+  I18n.locale = :ru   # => :ru
+  @post.title         # => 'Русский тайтл'
+
+
+== Downside
+
+As far the plugin stores several localization in the same field serializing it, you can't use ActiveRecord find method and order find results by these fields. It is recommended to use :text column type for this fields because :string usually has not enough length for storing serialized fields.
+
+
+
+Copyright © 2009 Igor Gladkoborodov, released under the MIT license.
