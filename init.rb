@@ -1,1 +1,1 @@
-ActiveRecord::Base.send(:include, LocalizedColumn)
+ActiveRecord::Base.send(:extend, LocalizedColumn::ClassMethods)
