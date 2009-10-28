@@ -24,4 +24,11 @@ describe LocalizedColumn do
     p.update_attributes(:title_en => "Title EN", :title_ru => "Title RU")
     Page.first.title.should == "Title RU"
   end
+  
+  it "should make localized" do
+    p = Page.create(:title => "Simple page")
+    p.make_localized(:title)
+    # p.title_ru.should == "Simple page"
+    # p.title_en.should == "Simple page"
+  end
 end
