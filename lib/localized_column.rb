@@ -43,13 +43,12 @@ module LocalizedColumn
     
     # Return value for current locale
     def get_column(name, locale)
-      set_blank_hash(name) unless send(name)
-      column_data(name)[locale]
+      column_data(name)[locale] if column_data(name).present?
     end
     
     # Sets value for name in locale
     def set_column(name, locale, value)
-      set_blank_hash(name) unless send(name)
+      set_blank_hash(name) if column_data(name).blank?
       column_data(name)[locale.to_sym] = value
     end
     

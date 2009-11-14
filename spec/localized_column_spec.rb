@@ -31,4 +31,25 @@ describe LocalizedColumn do
     # p.title_ru.should == "Simple page"
     # p.title_en.should == "Simple page"
   end
+
+  it "should not care about localized fields creation order" do
+    p = Page.new
+    p.title_en = 'title en'
+    p.title_ru = 'title ru'
+    p.title_en.should == 'title en'
+    p.title_ru.should == 'title ru'
+
+    p = Page.new
+    p.title_ru = 'title ru'
+    p.title_en = 'title en'
+    p.title_ru.should == 'title ru'
+    p.title_en.should == 'title en'
+  end
+
+  it "should work if localized field is empty" do
+    p = Page.new
+    p.title.should be_nil
+    p.title_ru.should be_nil
+  end
+
 end
